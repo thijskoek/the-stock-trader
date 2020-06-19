@@ -5,20 +5,22 @@ const state = {
 };
 
 const mutations = {
-    'SET-STOCKS'(state, stocks) {
+    'SET_STOCKS'(state, stocks) {
         state.stocks = stocks;
     },
-    'RND-STOCKS' (state) {
-
+    'RND_STOCKS' (state) {
+        state.stocks.forEach(stock => {
+            stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+        });
     }
 };
 
 const actions = {
     buyStock: ({ commit }, order) => {
-        commit();
+        commit('BUY_STOCK', order);
     },
     initStocks: ({ commit }) => {
-        commit('SET-STOCKS', stocks);
+        commit('SET_STOCKS', stocks);
     },
     randomizeStocks: ({commit}) => {
         commit('RND_STOCKS');
